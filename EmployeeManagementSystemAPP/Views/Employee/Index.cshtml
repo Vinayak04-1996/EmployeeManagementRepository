@@ -153,37 +153,34 @@
         </tr>
     </thead>
     <tbody>
-        <!-- Toast Notification (Initially Hidden) -->
-        <div id="successToast" class="toast" style="position: fixed; top: 20px; right: 20px; z-index: 1050;" data-delay="3000">
-            <div class="toast-header">
-                <strong class="mr-auto">Success</strong>
-                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="toast-body">
-                @TempData["SuccessMessage"]
-            </div>
-        </div>
-
-        @foreach (var item in Model)
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Designation</td>
+                    <td>@item.Address</td>
+                    <td>@item.Gender</td>
+                    <td>@item.Salary</td>
+                    <td>@item.Email</td>
+                    <td>
+                        <a class="btn btn-info btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a onclick="showDeleteModal(@item.Id)" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
         {
             <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Designation</td>
-                <td>@item.Address</td>
-                <td>@item.Gender</td>
-                <td>@item.Salary</td>
-                <td>@item.Email</td>
-                <td>
-                    <a class="btn btn-info btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a onclick="showDeleteModal(@item.Id)" class="btn btn-danger btn-sm">Delete</a>
-                </td>
+                <td colspan="8" class="text-center">No Data Found</td>  <!-- Message for no data found -->
             </tr>
         }
     </tbody>
 </table>
+
     
 </body>
 </html>
