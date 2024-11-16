@@ -14,19 +14,6 @@ namespace EmployeeManagementSystemAPP.Controllers
         {
             _userController = userController;
         }
-        // GET: UserController
-        //public ActionResult GetUsers()
-        //{
-        //    var users = _userController.GetAllList();
-        //    return View(users);
-        //}
-
-        //// GET: UserController/Details/5
-        //public ActionResult GetUserDetailsById(int id)
-        //{
-        //    var userDetails = _userController.GetUserById(id);
-        //    return View(userDetails);
-        //}
 
         // GET: UserController/Create
         public ActionResult Create()
@@ -42,10 +29,11 @@ namespace EmployeeManagementSystemAPP.Controllers
             try
             {
                 var adduser = _userController.AddUser(user);
-                return RedirectToAction( "Login");
+                return RedirectToAction("Login","Login");
             }
             catch
             {
+                ModelState.AddModelError(string.Empty, "An error occurred while creating the user. Please try again.");
                 return View();
             }
         }
